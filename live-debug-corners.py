@@ -58,20 +58,26 @@ class OutputHandler():
             return False
     
     def draw_point(self, point, typ):
-        size = 2
+        sz = 2
         pixels = []
-        if typ == HINTS: # x shape
-            pixels = [point,
-                     [point[0]+size, point[1]+size],
-                     [point[0]-size, point[1]+size],
-                     [point[0]+size, point[1]-size],
-                     [point[0]-size, point[1]-size]]
-        else: # + shape
-            pixels = [point,
-                     [point[0]+size, point[1]     ],
-                     [point[0]-size, point[1]     ],
-                     [point[0],      point[1]+size],
-                     [point[0],      point[1]-size]]
+        if typ == HINTS:
+            pixels =[[point[0]-2*sz, point[1]-2*sz],
+                     [point[0]-1*sz, point[1]-2*sz],
+                     [point[0]-2*sz, point[1]-1*sz],
+                     [point[0]+2*sz, point[1]+2*sz],
+                     [point[0]+1*sz, point[1]+2*sz],
+                     [point[0]+2*sz, point[1]+1*sz]]
+        else:
+            #pixels =[[point[0]+2*sz, point[1]-2*sz],
+            #         [point[0]+1*sz, point[1]-2*sz],
+            #         [point[0]+2*sz, point[1]-1*sz],
+            #         [point[0]-2*sz, point[1]+2*sz],
+            #         [point[0]-1*sz, point[1]+2*sz],
+            #         [point[0]-2*sz, point[1]+1*sz]]
+            for x in [-1*sz, 0, 1*sz]:
+                for y in [-1*sz, 0, 1*sz]:
+                    pixels.append([point[0]+x, point[1]+y])
+             
  
         for p in pixels:
             self.renderer.draw_point(p, self.colors[typ])
