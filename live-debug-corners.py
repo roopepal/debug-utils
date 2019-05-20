@@ -119,9 +119,6 @@ try:
         
         line = adb.stdout.readline().decode("utf-8", "replace").strip()
         
-        if len(line) == 0:
-            break
-
         if line.startswith("corners"):
             grab = CORNERS
             continue
@@ -137,8 +134,8 @@ try:
                 lines = []
                 grab = NOTHING
 
-except KeyboardInterrupt:
-    pass
+except Exception as e:
+    print(e)
 
 sdl2.ext.quit()
 adb.kill()
